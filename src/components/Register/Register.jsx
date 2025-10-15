@@ -1,10 +1,16 @@
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './../../__firebase_init';
+import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 const Register = () => {
+    
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleRegister = (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
 
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -48,7 +54,17 @@ const Register = () => {
                             d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                             clipRule="evenodd" />
                     </svg>
-                    <input type="password" name="password" className="grow" placeholder="password" />
+                    <input type={showPassword ? 'text' : 'password'}
+                        name="password"
+                        className="grow" placeholder="password" />
+                    <button type='button'
+                        onClick={() => setShowPassword(!showPassword)}
+                        className='btn btn-xs'>
+                        {
+                            showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                        }
+
+                    </button>
                 </label>
                 <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent my-5">Login</button>
 
